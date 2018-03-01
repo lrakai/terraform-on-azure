@@ -1,0 +1,25 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageAccountName": {
+            "type": "string",
+            "defaultValue": "cacloudshell"
+        },
+        "storageAccountType": {
+            "type": "string",
+            "defaultValue": "Standard_LRS"
+        }
+    },
+    "resources": [
+        {
+            "name": "[toLower(replace(concat(parameters('storageAccountName'), resourceGroup().name),'-', ''))]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2015-06-15",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "accountType": "[parameters('storageAccountType')]"
+            }
+        }
+    ]
+}
