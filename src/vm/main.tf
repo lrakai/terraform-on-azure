@@ -40,7 +40,7 @@ resource "azurerm_managed_disk" "web_disk" {
   resource_group_name  = "${var.resource_group_name}"
   storage_account_type = "Standard_LRS"
   create_option        = "Empty"
-  disk_size_gb         = "40"
+  disk_size_gb         = "30"
 
   tags = "${local.shared_tags}"
 }
