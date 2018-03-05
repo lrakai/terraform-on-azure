@@ -34,7 +34,7 @@ resource "azurerm_network_interface" "web_interface" {
 }
 
 # Managed disk to store the OS disk of the VM
-resource "azurerm_managed_disk" "test" {
+resource "azurerm_managed_disk" "web_disk" {
   name                 = "datadisk_existing"
   location             = "${var.resource_group_location}"
   resource_group_name  = "${var.resource_group_name}"
@@ -63,7 +63,7 @@ resource "azurerm_virtual_machine" "web_server" {
   }
 
   storage_os_disk {
-    name              = "myosdisk1"
+    name              = "web_os_disk"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
@@ -86,7 +86,7 @@ resource "azurerm_virtual_machine" "web_server" {
   tags = "${merge(
       local.shared_tags,
       map(
-        "Environment", ${var.environment}
+        "Environment", var.environment
       )
   )}"
 }
