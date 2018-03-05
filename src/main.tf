@@ -20,10 +20,10 @@ module "network" {
 }
 
 module "security" {
-    source                     = "Azure/network-security-group/azurerm//modules/HTTP"
-    resource_group_name        = "nsg-resource-group"
-    location                   = "westus"
-    security_group_name        = "nsg"
+    source              = "Azure/network-security-group/azurerm//modules/HTTP"
+    resource_group_name = "${data.azurerm_resource_group.dev.name}"
+    location            = "${data.azurerm_resource_group.dev.location}"
+    security_group_name = "nsg"
     
     tags = {
       environment = "dev"
