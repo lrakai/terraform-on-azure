@@ -18,9 +18,10 @@ resource "azurerm_public_ip" "web_public_ip" {
 
 # Network interface to attach the VM to the network
 resource "azurerm_network_interface" "web_interface" {
-  name                = "web_ni"
-  location            = "${var.resource_group_location}"
-  resource_group_name = "${var.resource_group_name}"
+  name                      = "web_ni"
+  location                  = "${var.resource_group_location}"
+  resource_group_name       = "${var.resource_group_name}"
+  network_security_group_id = "${var.network_security_group_id}"
 
   ip_configuration {
     name                          = "web_ip_configuration"
@@ -76,6 +77,10 @@ resource "azurerm_virtual_machine" "web_server" {
 
   os_profile_linux_config {
     disable_password_authentication = false
+  }
+
+  provisioner "remote-exec" {
+    script = "${path.module}/scripts/init.sh"
   }
 
   tags = "${merge(
