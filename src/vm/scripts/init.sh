@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # install Apache web server
-sudo apt install apache2
+sudo apt install -y apache2
 
 # Create web asset
-echo "Served with the help of Terraform" > /var/www/html/index.html
+sudo sh -c 'echo "Served with the help of Terraform" > /var/www/html/index.html'
