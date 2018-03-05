@@ -35,7 +35,7 @@ resource "azurerm_network_interface" "web_interface" {
 
 # Managed disk to store the OS disk of the VM
 resource "azurerm_managed_disk" "web_disk" {
-  name                 = "datadisk_existing"
+  name                 = "web_disk"
   location             = "${var.resource_group_location}"
   resource_group_name  = "${var.resource_group_name}"
   storage_account_type = "Standard_LRS"
