@@ -55,6 +55,7 @@ resource "azurerm_virtual_machine" "web_server" {
 
   delete_os_disk_on_termination = true
 
+  # Use a Ubuntu image
   storage_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
@@ -62,6 +63,7 @@ resource "azurerm_virtual_machine" "web_server" {
     version   = "latest"
   }
 
+  # Use the managed disk for storing the OS disk
   storage_os_disk {
     name              = "web_os_disk"
     caching           = "ReadWrite"
@@ -79,10 +81,24 @@ resource "azurerm_virtual_machine" "web_server" {
     disable_password_authentication = false
   }
 
-  provisioner "remote-exec" {
-    script = "${path.module}/scripts/init.sh"
+  # Prevent down-time with a lifecyle policy
+  lifecycle {
+    create_before_destroy = true
   }
 
+  provisioner "remote-exec" {
+    # Use module relative path (path.module) to the script
+    script = "${path.module}/scripts/init.sh"
+
+    connection {
+      type     = "ssh"
+      host     = "${azurerm_public_ip.web_public_ip.ip_address}"
+      user     = "student"
+      password = "1Cloud_Academy_Labs!"
+    }
+  }
+
+  # Merge the shared_tags with an environment tag
   tags = "${merge(
       local.shared_tags,
       map(
