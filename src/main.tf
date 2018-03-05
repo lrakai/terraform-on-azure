@@ -25,6 +25,18 @@ module "security" {
     location            = "${data.azurerm_resource_group.dev.location}"
     security_group_name = "nsg"
     
+    custom_rules = [
+      {
+        name                   = "ssh"
+        priority               = "200"
+        direction              = "Inbound"
+        access                 = "Allow"
+        protocol               = "tcp"
+        destination_port_range = "22"
+        description            = "ssh-access"
+      },
+    ]
+
     tags = {
       environment = "dev"
     }
