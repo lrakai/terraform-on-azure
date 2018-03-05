@@ -70,7 +70,7 @@ resource "azurerm_virtual_machine" "web_server" {
   }
 
   os_profile {
-    computer_name  = "web_server"
+    computer_name  = "webserver"
     admin_username = "student"
     admin_password = "1Cloud_Academy_Labs!"
   }
