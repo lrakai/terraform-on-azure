@@ -13,7 +13,7 @@ resource "azurerm_public_ip" "web_public_ip" {
   resource_group_name          = "${var.resource_group_name}"
   public_ip_address_allocation = "static"
 
-  tags = "${locals.shared_tags}"
+  tags = "${local.shared_tags}"
 }
 
 # Network interface to attach the VM to the network
@@ -30,7 +30,7 @@ resource "azurerm_network_interface" "web_interface" {
     public_ip_address_id          = "${azurerm_public_ip.web_public_ip.id}"
   }
 
-  tags = "${locals.shared_tags}"
+  tags = "${local.shared_tags}"
 }
 
 # Managed disk to store the OS disk of the VM
@@ -42,7 +42,7 @@ resource "azurerm_managed_disk" "test" {
   create_option        = "Empty"
   disk_size_gb         = "40"
 
-  tags = "${locals.shared_tags}"
+  tags = "${local.shared_tags}"
 }
 
 # VM to run the web server
@@ -84,7 +84,7 @@ resource "azurerm_virtual_machine" "web_server" {
   }
 
   tags = "${merge(
-      locals.shared_tags,
+      local.shared_tags,
       map(
         "Environment", ${var.environment}
       )
