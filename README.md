@@ -1,5 +1,9 @@
 # terraform-on-azure
 
+Demonstrate how to use modules shared on the public Terraform Registry, and create your own. The goal is to use modules to deploy a web server in Azure.
+
+![Environment on completion](https://user-images.githubusercontent.com/3911650/37015433-52557eb0-20c4-11e8-9d55-b078633e4414.png)
+
 ## Getting Started
 
 An Azure RM template is included in `infrastructure/` to create the environment:
@@ -22,7 +26,14 @@ Alternatively, you can perform a one-click deploy with the following button:
 
 ## Following Along
 
-Create a Bash Azure Cloud Shell in the cloudshell storage account that is created by the template. Terraform is installed in the cloud shell by default and is automatically authenticated.
+1. Create a Bash Azure Cloud Shell in the cloudshell storage account that is created by the template. Terraform is installed in the cloud shell by default and is automatically authenticated.
+1. Copies the files in the `src/` directory to the Cloud Shell file share.
+1. Change into the `clouddrive/` directory in the Cloud Shell to see the copied files.
+1. Initialize the working directory with `terraform init`
+
+    1. Cloud Shell doesn't support soft links. As a workaround you can create copies of the modules in the `.terraform/modules` directory using the directory names given in the error messages
+    
+1. Apply the configuration changes to have all the resources created and the VM provisioned.
 
 ## Tearing Down
 
