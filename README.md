@@ -33,7 +33,7 @@ Alternatively, you can perform a one-click deploy with the following button:
 
     1. Cloud Shell doesn't support soft links. As a workaround you can create copies of the modules in the `.terraform/modules` directory using the directory names given in the error messages
     
-1. Apply the configuration changes to have all the resources created and the VM provisioned.
+1. Apply the configuration changes with `terraform apply` to have all the resources created and the VM provisioned.
 
 ## Tearing Down
 
