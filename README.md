@@ -27,7 +27,7 @@ Alternatively, you can perform a one-click deploy with the following button:
 ## Following Along
 
 1. Create a Bash Azure Cloud Shell in the cloudshell storage account that is created by the template. Terraform is installed in the cloud shell by default and is automatically authenticated.
-1. Copies the files in the `src/` directory to the Cloud Shell file share.
+1. Copy the files in the `src/` directory to the Cloud Shell file share.
 1. Change into the `clouddrive/` directory in the Cloud Shell to see the copied files.
 1. Initialize the working directory with `terraform init`
 
